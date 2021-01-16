@@ -2,6 +2,8 @@
 
 **TODO: Add description**
 
+    mix phx.gen.tailwind Blog Post posts title body:text
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed

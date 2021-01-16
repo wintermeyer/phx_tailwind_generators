@@ -88,7 +88,7 @@ defmodule Mix.Tasks.Phx.Gen.Tailwind do
     Gen.Context.prompt_for_code_injection(context)
 
     binding = [context: context, schema: schema, inputs: inputs(schema)]
-    paths = Mix.Phoenix.generator_paths()
+    paths = [:phx_tailwind_generators, :phoenix]
 
     prompt_for_conflicts(context)
 
@@ -131,8 +131,7 @@ defmodule Mix.Tasks.Phx.Gen.Tailwind do
   @doc false
   def copy_new_files(%Context{} = context, paths, binding) do
     files = files_to_be_generated(context)
-#    Mix.Phoenix.copy_from(paths, "priv/templates/phx.gen.tailwind", binding, files)
-    Mix.Phoenix.copy_from(paths, :code.priv_dir('templates/phx.gen.tailwind')|>to_string, binding, files)
+    Mix.Phoenix.copy_from(paths, "priv/templates/phx.gen.tailwind", binding, files)
     if context.generate?, do: Gen.Context.copy_new_files(context, paths, binding)
     context
   end
