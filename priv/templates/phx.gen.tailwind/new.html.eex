@@ -1,0 +1,1 @@
+<%%= render "form.html", Map.put(assigns, :action, Routes.<%= schema.route_helper %>_path(@conn, :create)) |> Map.put(:title, gettext("New %{name}", name: "<%= schema.human_singular %>")) %>

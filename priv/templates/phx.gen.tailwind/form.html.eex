@@ -1,0 +1,71 @@
+<%%= form_for @changeset, @action, [class: ""], fn f -> %>
+  <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+
+    <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          <%%= assigns[:title] %>
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+          <%%= assigns[:subtitle]  %>
+        </p>
+      </div>
+
+      <%%= if @changeset.action do %>
+        <div class="rounded-md bg-red-50 p-4">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <svg class="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div class="ml-3">
+              <h3 class="text-sm font-medium text-yellow-800">
+                <%%= gettext "Oops, something went wrong! Please check the errors below." %>
+              </h3>
+            </div>
+          </div>
+        </div>
+      <%% end %>
+
+      <div class="space-y-6 sm:space-y-5">
+        <%= for {label, input, error} <- inputs, input do %>
+          <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+            <%= label %>
+            <div class="mt-1 sm:mt-0 sm:col-span-2">
+              <%= input %>
+              <%= error %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pt-5">
+    <div class="flex justify-between">
+      <div>
+        <%%= link to: Routes.<%= schema.route_helper %>_path(@conn, :index), class: "inline-flex items-center px-5 mr-2 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+          <span class="not-sr-only">
+            <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+            </svg>
+          </span>
+          <%%= gettext "Back" %>
+        <%% end %>
+      </div>
+      <div>
+        <%%= submit class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do %>
+          <span class="not-sr-only">
+            <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+            </svg>
+          </span>
+          <%%= gettext "Save" %>
+        <%% end %>
+      </div>
+    </div>
+  </div>
+
+<%% end %>
