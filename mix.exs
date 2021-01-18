@@ -7,7 +7,10 @@ defmodule PhxTailwindGenerators.MixProject do
       version: "0.1.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      description: "Generators to create templates with Tailwind CSS.",
+      name: "PhxTailwindGenerators",
+      source_url: "https://github.com/wintermeyer/phx_tailwind_generators"
     ]
   end
 
@@ -22,8 +25,6 @@ defmodule PhxTailwindGenerators.MixProject do
   defp deps do
     [
       {:phoenix, "~> 1.5.7"}
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
 end

@@ -1,10 +1,11 @@
 defmodule Mix.Tasks.Phx.Gen.Tailwind do
-  @shortdoc "Generates controller, views, and context for an HTML resource"
+  @shortdoc "Generates controller, views, and context for an HTML resource with Tailwind CSS"
 
   @moduledoc """
-  Generates controller, views, and context for an HTML resource.
+  Generates controller, views, and context for an HTML resource with
+  Tailwind CSS.
 
-      mix tailwind.gen.html Accounts User users name:string age:integer
+      mix phx.gen.tailwind Accounts User users name:string age:integer
 
   The first argument is the context module followed by the schema module
   and its plural name (used as the schema table name).
@@ -49,7 +50,7 @@ defmodule Mix.Tasks.Phx.Gen.Tailwind do
 
   Alternatively, the `--context-app` option may be supplied to the generator:
 
-      mix tailwind.gen.html Sales User users --context-app warehouse
+      mix phx.gen.tailwind Sales User users --context-app warehouse
 
   ## Web namespace
 
@@ -57,7 +58,7 @@ defmodule Mix.Tasks.Phx.Gen.Tailwind do
   You can customize the web module namespace by passing the `--web` flag with a
   module name, for example:
 
-      mix tailwind.gen.html Sales User users --web Sales
+      mix phx.gen.tailwind Sales User users --web Sales
 
   Which would generate a `lib/app_web/controllers/sales/user_controller.ex` and
   `lib/app_web/views/sales/user_view.ex`.
@@ -81,7 +82,7 @@ defmodule Mix.Tasks.Phx.Gen.Tailwind do
   @doc false
   def run(args) do
     if Mix.Project.umbrella?() do
-      Mix.raise "mix tailwind.gen.html must be invoked from within your *_web application root directory"
+      Mix.raise "mix phx.gen.tailwind must be invoked from within your *_web application root directory"
     end
 
     {context, schema} = Gen.Context.build(args)
