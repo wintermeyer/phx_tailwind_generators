@@ -65,7 +65,7 @@ $ cd ..
 
 Open the file **assets/tailwind.config.js** with an editor and change it according this diff:
 
-```javascript
+````
 2c2,8
 <   purge: [],
 ---
@@ -76,7 +76,7 @@ Open the file **assets/tailwind.config.js** with an editor and change it accordi
 >     "../**/live/**/*.ex",
 >     "./js/**/*.js",
 >   ],
-```
+````
 
 Do this change in **assets/package.json**
 
