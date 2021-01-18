@@ -198,6 +198,6 @@ defmodule Mix.Tasks.Phx.Gen.Tailwind do
   end
 
   defp error(field) do
-    ~s(<%= PhxTailwindGenerators.tailwind_error_tag f, #{inspect(field)} %>)
+    # ~s(<%= PhxTailwindGenerators.tailwind_error_tag f, #{inspect(field)} %>)
   end
 end
