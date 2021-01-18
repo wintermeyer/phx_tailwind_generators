@@ -106,6 +106,8 @@ $ rm assets/css/phoenix.css
 
 The test: Fire up your Phoenix application with `mix phx.server` and open http://localhost:4000 with your browser. Open `lib/example_shop_web/templates/page/index.html.eex` in your editor and search for a `<h1>` or `<p>` element. Add `class="text-red-500"` to it and watch it turn red in your browser.
 
+Of course you have to customize `lib/example_shop_web/templates/layout/app.html.eex` to get a nice layout. You find some good examples at https://tailwindui.com
+
 ### Add CSS for the forms
 
 We are not 100% there yet because we need some extra CSS for forms. But that is done in two steps:
