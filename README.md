@@ -1,12 +1,16 @@
 # PhxTailwindGenerators
 
-If you already have a [Tailwind CSS](https://tailwindui.com) system up and running within your Phoenix application than you just have to add `{:phx_tailwind_generators, "~> 0.1.0"}` to your `mix.exs` and run a `mix deps.get` to get access to the `mix phx.gen.tailwind Blog Post posts title body:text` generator.
+A scaffold generator for new resources which uses [Tailwind CSS](https://tailwindui.com) and not the default [Milligram](https://milligram.io).
+
+If you already have a Tailwind system up and running within your Phoenix application than you just have to add `{:phx_tailwind_generators, "~> 0.1.0"}` to your `mix.exs` and run a `mix deps.get` to get access to the `mix phx.gen.tailwind Blog Post posts title body:text` generator.
 
 If you don't have a Tailwind setup yet ... I have you covered. And yes, you can use this Howto even if you don't want to use the generator.
 
 ## Setup Phoenix with Tailwind
 
-A step by step howto to setup a Phoenix system with [Tailwind CSS](https://tailwindui.com). When useful I use the output of [diff](https://en.wikipedia.org/wiki/Diff) to describe where to include/change code (the first number is the line number).
+A step by step howto to setup a Phoenix system with [Tailwind CSS](https://tailwindui.com). When useful I use the output of [diff](https://en.wikipedia.org/wiki/Diff) to describe where to include/change code (the first number is the line number). 
+
+I promise to not use "this is easy". Nothing is easy if you don't know how to do it.
 
 ### A green field
 
@@ -104,13 +108,15 @@ The test: Fire up your Phoenix application with `mix phx.server` and open http:/
 
 ### Add CSS for the forms
 
-We are not 100% there yet because we need some extra CSS for forms. First step:
+We are not 100% there yet because we need some extra CSS for forms. But that is done in two steps:
 
 ````
+$ cd assets
 $ npm install @tailwindcss/forms
+$ cd ..
 ````
 
-Second step: Change **assets/tailwind.config.js** according to this diff. 
+Change **assets/tailwind.config.js** according to this diff. 
 
 ````
 16,17c16,19
@@ -150,9 +156,52 @@ The generator works like the default scaffold generator. Only the name is differ
 mix phx.gen.tailwind Blog Post posts title body:text
 ````
 
-This will create templates which use Tailwind CSS. 
+This will create templates which use Tailwind CSS. Have fun with it.
 
-Please do submit bugs or better pull requests!
+Please do submit bugs or better create pull requests!
+
+## Bonus: Install Alpine
+
+Since you are now using Phoenix with Tailwind the chances are high that 
+you want to use [Alpine.js](https://github.com/alpinejs/alpine) too. Follow me.
+
+````
+$ cd assets
+$ npm install alpinejs
+$ cd ..
+````
+
+Open **assets/js/app.js** in your editor and add these lines to the bottom:
+
+````
+let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
+
+// Alpinejs
+import Alpine from "alpinejs"
+let liveSocket = new LiveSocket("/live", Socket, {
+  params: { _csrf_token: csrfToken },
+  dom: {
+    onBeforeElUpdated(from, to) {
+      if (from.__x) { Alpine.clone(from.__x, to) }
+    }
+  }
+})
+````
+
+You can test your new setup with this example code. Just place it in  `lib/example_shop_web/templates/page/index.html.eex` and click on the blue button.
+
+````
+<div x-data="{ open: false }">
+    <button @click="open = true" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Open Dropdown</button>
+
+    <ul
+        x-show="open"
+        @click.away="open = false"
+    >
+        Dropdown Body
+    </ul>
+</div>
+````
 
 ## Acknowledgments
 
@@ -162,3 +211,5 @@ Resources I used:
 
 - [Adding Tailwind CSS to Phoenix 1.4 and 1.5](https://pragmaticstudio.com/tutorials/adding-tailwind-css-to-phoenix)
 - [Phoenix 1.5 with Tailwind](https://sisccr.medium.com/phoenix-1-5-with-tailwind-4030198bf7c7)
+- [Combine Phoenix LiveView with Alpine.js](https://fullstackphoenix.com/tutorials/combine-phoenix-liveview-with-alpine-js)
+- [Optimizing User Experience with LiveView](https://dockyard.com/blog/2020/12/21/optimizing-user-experience-with-liveview)
