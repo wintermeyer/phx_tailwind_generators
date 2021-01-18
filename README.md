@@ -16,33 +16,33 @@ I promise to not use "this is easy". Nothing is easy if you don't know how to do
 
 We start with a fresh Phoenix application named `example_shop`:
 
-````
+```bash
 $ mix phx.new example_shop
 $ cd example_shop
 $ mix ecto.create
-````
+```
 
 ### Add PostCSS
 
 [PostCSS](https://postcss.org) is a tool for transforming CSS with JavaScript.
 
-````
+```bash
 $ cd assets
 $ npm install tailwindcss postcss autoprefixer postcss-loader --save-dev
 $ cd ..
-````
+```
 
 Create the following file with this content:
 
 **assets/postcss.config.js**
-````
+```javascript
 module.exports = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
   }
 }
-````
+```
 
 Open the file **assets/webpack.config.js** in the 
 editor of your choice. Search for `sass-loader` and add `'postcss-loader',` before it.
@@ -57,15 +57,15 @@ The diff:
 
 This makes for a minimal CSS file in your production environment. This results in a better WebPerformance.
 
-````
+```bash
 $ cd assets
 $ npx tailwind init
 $ cd ..
-````
+```
 
 Open the file **assets/tailwind.config.js** with an editor and change it according this diff:
 
-````
+```javascript
 2c2,8
 <   purge: [],
 ---
@@ -76,7 +76,7 @@ Open the file **assets/tailwind.config.js** with an editor and change it accordi
 >     "../**/live/**/*.ex",
 >     "./js/**/*.js",
 >   ],
-````
+```
 
 Do this change in **assets/package.json**
 
@@ -89,18 +89,18 @@ Do this change in **assets/package.json**
 
 Replace **assets/css/app.scss** with this code:
 
-````
+```css
 /* This file is for your main application css. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-````
+```
 
 Remove the not needed default Phoenix CSS:
 
-````
+```bash
 $ rm assets/css/phoenix.css 
-````
+```
 
 **Now you have a running Tailwind CSS system within your Phoenix application!**
 
@@ -112,11 +112,11 @@ Of course you have to customize `lib/example_shop_web/templates/layout/app.html.
 
 We are not 100% there yet because we need some extra CSS for forms. But that is done in two steps:
 
-````
+```bash
 $ cd assets
 $ npm install @tailwindcss/forms
 $ cd ..
-````
+```
 
 Change **assets/tailwind.config.js** according to this diff. 
 
@@ -154,28 +154,28 @@ be found at [https://hexdocs.pm/phx_tailwind_generators](https://hexdocs.pm/phx_
 
 The generator works like the default scaffold generator. Only the name is different:
 
-````
+```bash
 mix phx.gen.tailwind Blog Post posts title body:text
-````
+```
 
 This will create templates which use Tailwind CSS. Have fun with it.
 
 Please do submit bugs or better create pull requests!
 
-## Bonus: Install Alpine
+## Bonus: Install Alpine.js
 
 Since you are now using Phoenix with Tailwind the chances are high that 
 you want to use [Alpine.js](https://github.com/alpinejs/alpine) too. Follow me.
 
-````
+```bash
 $ cd assets
 $ npm install alpinejs
 $ cd ..
-````
+```
 
 Open **assets/js/app.js** in your editor and add these lines to the bottom:
 
-````
+```javascript
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
 // Alpinejs
@@ -188,11 +188,11 @@ let liveSocket = new LiveSocket("/live", Socket, {
     }
   }
 })
-````
+```
 
 You can test your new setup with this example code. Just place it in  `lib/example_shop_web/templates/page/index.html.eex` and click on the blue button.
 
-````
+```html
 <div x-data="{ open: false }">
     <button @click="open = true" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Open Dropdown</button>
 
@@ -203,7 +203,7 @@ You can test your new setup with this example code. Just place it in  `lib/examp
         Dropdown Body
     </ul>
 </div>
-````
+```
 
 ## Acknowledgments
 
