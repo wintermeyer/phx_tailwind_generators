@@ -10,7 +10,15 @@ defmodule PhxTailwindGenerators.MixProject do
       deps: deps(),
       description: "Generators to create templates with Tailwind CSS.",
       name: "PhxTailwindGenerators",
-      source_url: "https://github.com/wintermeyer/phx_tailwind_generators"
+      package: %{
+        maintainers: ["Stefan Wintermeyer"],
+        licenses: ["MIT"],
+        links: %{
+          github: "https://github.com/wintermeyer/phx_tailwind_generators"
+        },
+      },
+      source_url: "https://github.com/wintermeyer/phx_tailwind_generators",
+      homepage_url: "https://github.com/wintermeyer/phx_tailwind_generators",
     ]
   end
 
