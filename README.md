@@ -215,3 +215,4 @@ Resources I used:
 - [Phoenix 1.5 with Tailwind](https://sisccr.medium.com/phoenix-1-5-with-tailwind-4030198bf7c7)
 - [Combine Phoenix LiveView with Alpine.js](https://fullstackphoenix.com/tutorials/combine-phoenix-liveview-with-alpine-js)
 - [Optimizing User Experience with LiveView](https://dockyard.com/blog/2020/12/21/optimizing-user-experience-with-liveview)
+- [Alpine.js](https://github.com/alpinejs/alpine)
