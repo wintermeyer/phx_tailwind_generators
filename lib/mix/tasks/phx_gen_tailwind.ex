@@ -197,7 +197,23 @@ defmodule Mix.Tasks.Phx.Gen.Tailwind do
     ~s(<%= label f, #{inspect(key)}, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>)
   end
 
+  # HELP!
+  #
+  # I am out of my depth here. The problem(s):
+  #
+  # - In error/1 I can't use the default error_tag/2 because I can't change the class of it.
+  # - If I define tailwind_error_tag/2 here I can't access it as a helper.
+
+  # defp tailwind_error_tag(form, field) do
+  #   Enum.map(Keyword.get_values(form.errors, field), fn error ->
+  #     content_tag(:p, translate_error(error),
+  #       class: "mt-2 text-sm text-red-500",
+  #       phx_feedback_for: input_name(form, field)
+  #     )
+  #   end)
+  # end
+
   defp error(field) do
-    # ~s(<%= PhxTailwindGenerators.tailwind_error_tag f, #{inspect(field)} %>)
+    # ~s(<%= tailwind_error_tag f, #{inspect(field)} %>)
   end
 end
