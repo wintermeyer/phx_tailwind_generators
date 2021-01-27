@@ -25,3 +25,6 @@ phx_tailwind_generators-*.tar
 
 # Temporary files for e.g. tests
 /tmp
+
+# macOS
+.DS_Store
