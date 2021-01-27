@@ -4,7 +4,7 @@ defmodule PhxTailwindGenerators.MixProject do
   def project do
     [
       app: :phx_tailwind_generators,
-      version: "0.1.2",
+      version: "0.1.3",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
