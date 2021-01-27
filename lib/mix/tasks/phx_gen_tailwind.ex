@@ -95,6 +95,7 @@ defmodule Mix.Tasks.Phx.Gen.Tailwind do
 
     context
     |> copy_new_files(paths, binding)
+    |> inject_error_helper(paths, binding)
     |> print_shell_instructions()
   end
 
@@ -197,21 +198,60 @@ defmodule Mix.Tasks.Phx.Gen.Tailwind do
     ~s(<%= label f, #{inspect(key)}, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>)
   end
 
-  # HELP!
-  #
-  # I am out of my depth here. The problem(s):
-  #
-  # - In error/1 I can't use the default error_tag/2 because I can't change the class of it.
-  # - If I define tailwind_error_tag/2 here I can't access it as a helper.
+  defp inject_error_helper(%Context{context_app: ctx_app} = context, _paths, _binding) do
+    web_prefix = Mix.Phoenix.web_path(ctx_app)
+    file_path = Path.join(web_prefix, "views/error_helpers.ex")
 
-  # defp tailwind_error_tag(form, field) do
-  #   Enum.map(Keyword.get_values(form.errors, field), fn error ->
-  #     content_tag(:p, translate_error(error),
-  #       class: "mt-2 text-sm text-red-500",
-  #       phx_feedback_for: input_name(form, field)
-  #     )
-  #   end)
-  # end
+    """
+
+      defp tailwind_error_tag(form, field) do
+        Enum.map(Keyword.get_values(form.errors, field), fn error ->
+          content_tag(:p, translate_error(error),
+            class: "mt-2 text-sm text-red-500",
+            phx_feedback_for: input_name(form, field)
+          )
+        end)
+      end
+    """
+    |> inject_before_final_end(file_path)
+
+    context
+  end
+
+  defp inject_before_final_end(content_to_inject, file_path) do
+    with {:ok, file} <- read_file(file_path),
+         {:ok, new_file} <- PhxTailwindGenerators.inject_before_final_end(file, content_to_inject) do
+      print_injecting(file_path)
+      File.write!(file_path, new_file)
+    else
+      :already_injected ->
+        :ok
+
+      {:error, {:file_read_error, _}} ->
+        :ok
+        # print_injecting(file_path)
+        #
+        # print_unable_to_read_file_error(
+        #   file_path,
+        #   """
+        #   Please add the following to the end of your equivalent
+        #   #{Path.relative_to_cwd(file_path)} module:
+        #   #{indent_spaces(content_to_inject, 2)}
+        #   """
+        # )
+    end
+  end
+
+  defp read_file(file_path) do
+    case File.read(file_path) do
+      {:ok, file} -> {:ok, file}
+      {:error, reason} -> {:error, {:file_read_error, reason}}
+    end
+  end
+
+  defp print_injecting(file_path, suffix \\ []) do
+    Mix.shell().info([:green, "* injecting ", :reset, Path.relative_to_cwd(file_path), suffix])
+  end
 
   defp error(field) do
     # ~s(<%= tailwind_error_tag f, #{inspect(field)} %>)
