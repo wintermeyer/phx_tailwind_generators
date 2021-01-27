@@ -2,7 +2,7 @@
 
 A scaffold generator for new resources which uses [Tailwind CSS](https://tailwindui.com) and not the default [Milligram](https://milligram.io).
 
-If you already have a Tailwind system up and running within your Phoenix application than you just have to add `{:phx_tailwind_generators, "~> 0.1.0"}` to your `mix.exs` and run a `mix deps.get` to get access to the `mix phx.gen.tailwind Blog Post posts title body:text` generator.
+If you already have a Tailwind system up and running within your Phoenix application than you just have to add `{:phx_tailwind_generators, "~> 0.1.3"}` to your `mix.exs` and run a `mix deps.get` to get access to the `mix phx.gen.tailwind Blog Post posts title body:text` generator.
 
 If you don't have a Tailwind setup yet ... I have you covered. And yes, you can use this Howto even if you don't want to use the generator.
 
@@ -141,7 +141,7 @@ by adding `phx_tailwind_generators` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:phx_tailwind_generators, "~> 0.1.0"}
+    {:phx_tailwind_generators, "~> 0.1.3"}
   ]
 end
 ```
