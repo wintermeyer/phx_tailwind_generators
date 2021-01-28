@@ -198,6 +198,10 @@ defmodule Mix.Tasks.Phx.Gen.Tailwind do
     ~s(<%= label f, #{inspect(key)}, class: "block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2" %>)
   end
 
+  defp error(field) do
+    ~s(<%= tailwind_error_tag f, #{inspect(field)} %>)
+  end
+
   defp inject_error_helper(%Context{context_app: ctx_app} = context, _paths, _binding) do
     web_prefix = Mix.Phoenix.web_path(ctx_app)
     file_path = Path.join(web_prefix, "views/error_helpers.ex")
@@ -253,7 +257,4 @@ defmodule Mix.Tasks.Phx.Gen.Tailwind do
     Mix.shell().info([:green, "* injecting ", :reset, Path.relative_to_cwd(file_path), suffix])
   end
 
-  defp error(field) do
-    # ~s(<%= tailwind_error_tag f, #{inspect(field)} %>)
-  end
 end
