@@ -4,6 +4,8 @@ A scaffold generator for new resources which uses [Tailwind CSS](https://tailwin
 
 If you already have a Tailwind system up and running within your Phoenix application than you just have to add `{:phx_tailwind_generators, "~> 0.1.6"}` to your `mix.exs` and run a `mix deps.get` to get access to the `mix phx.gen.tailwind Blog Post posts title body:text` generator.
 
+![Screencast](screencast.gif)
+
 In case you don't have a Phoenix with Tailwind setup yet you have two choices:
 
 - https://fullstackphoenix.com/boilerplates will do the heavy lifting for you.
