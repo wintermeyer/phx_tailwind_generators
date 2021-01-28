@@ -208,7 +208,7 @@ defmodule Mix.Tasks.Phx.Gen.Tailwind do
 
     """
 
-      defp tailwind_error_tag(form, field) do
+      def tailwind_error_tag(form, field) do
         Enum.map(Keyword.get_values(form.errors, field), fn error ->
           content_tag(:p, translate_error(error),
             class: "mt-2 text-sm text-red-500",
