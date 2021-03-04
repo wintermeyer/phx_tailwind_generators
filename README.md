@@ -33,7 +33,7 @@ $ mix ecto.create
 
 ```bash
 $ cd assets
-$ npm install tailwindcss postcss autoprefixer postcss-loader --save-dev
+$ npm install tailwindcss postcss autoprefixer postcss-loader@4.2 --save-dev
 $ cd ..
 ```
 
