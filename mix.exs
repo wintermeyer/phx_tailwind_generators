@@ -15,10 +15,10 @@ defmodule PhxTailwindGenerators.MixProject do
         licenses: ["MIT"],
         links: %{
           github: "https://github.com/wintermeyer/phx_tailwind_generators"
-        },
+        }
       },
       source_url: "https://github.com/wintermeyer/phx_tailwind_generators",
-      homepage_url: "https://github.com/wintermeyer/phx_tailwind_generators",
+      homepage_url: "https://github.com/wintermeyer/phx_tailwind_generators"
     ]
   end
 
@@ -32,7 +32,7 @@ defmodule PhxTailwindGenerators.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:phoenix, "~> 1.5.7"},
+      {:phoenix, ">= 1.5.7"},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
